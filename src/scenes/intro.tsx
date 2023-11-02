@@ -595,6 +595,9 @@ export default makeScene2D(function* (view) {
   )
 
   var front_end_lines: Line[] = []
+  var front_end_rects: Rect[] = []
+  var front_end_txts: Txt[] = []
+
   yield view.add(
     <Spline
     ref={makeRef(front_end_lines, front_end_lines.length)}
@@ -608,12 +611,130 @@ export default makeScene2D(function* (view) {
     />
   )
 
+  yield* beginSlide("Explaining frontend interface")
+
   yield* all (
     frontendText.position(Vector2.zero.addY(-450), 1),
     frontendBox.fill(bg, 1),
     front_end_lines[front_end_lines.length-1].end(1, 1)
   )
 
+  yield view.add(
+    <Rect
+      opacity={0}
+      ref={makeRef(front_end_rects, front_end_rects.length)}
+      fill={'#313244'}
+      y={50}
+    />
+  )
 
-  yield* beginSlide("Explaining frontend interface")
+  yield* all (
+    front_end_rects[front_end_rects.length-1].opacity(1, 1),
+    front_end_rects[front_end_rects.length-1].width('80%', 1),
+    front_end_rects[front_end_rects.length-1].height('80%', 1),
+    frontendText.text(`Frontend - Sign In`, 1),
+  )
+
+  yield view.add(
+    <>
+    <Rect
+      // width={200}
+      // height={80}
+      opacity={0}
+      ref={makeRef(front_end_rects, front_end_rects.length)}
+      fill={'#585b70'}
+      y={-50}
+      grow={0}
+    >
+      <Txt
+        text={""}
+        opacity={0}
+        ref={makeRef(front_end_txts, front_end_txts.length)}
+        />
+    </Rect>
+    <Rect
+      // width={200}
+      // height={80}
+      opacity={0}
+      ref={makeRef(front_end_rects, front_end_rects.length)}
+      fill={'#585b70'}
+      y={50}
+      grow={0}
+    >
+      <Txt
+        text={""}
+        opacity={0}
+        ref={makeRef(front_end_txts, front_end_txts.length)}
+        />
+    </Rect>
+    <Rect
+      // width={200}
+      // height={80}
+      opacity={0}
+      ref={makeRef(front_end_rects, front_end_rects.length)}
+      fill={'#b4befe'}
+      y={150}
+      grow={0}
+    >
+      <Txt
+        text={"login"}
+        alignItems={'center'}
+        alignContent={'center'}
+        justifyContent={'center'}
+        textAlign={'center'}
+        opacity={0}
+        ref={makeRef(front_end_txts, front_end_txts.length)}
+        />
+    </Rect>
+    </>
+  )
+
+  yield* all(
+    front_end_rects[front_end_rects.length-1].opacity(1, 1),
+    front_end_rects[front_end_rects.length-1].width(200, 1),
+    front_end_rects[front_end_rects.length-1].height(80, 1),
+
+    front_end_rects[front_end_rects.length-2].opacity(1, 1),
+    front_end_rects[front_end_rects.length-2].width(200, 1),
+    front_end_rects[front_end_rects.length-2].height(80, 1),
+
+    front_end_rects[front_end_rects.length-3].opacity(1, 1),
+    front_end_rects[front_end_rects.length-3].width(200, 1),
+    front_end_rects[front_end_rects.length-3].height(80, 1),
+    ...front_end_txts.map(txt =>
+      txt.opacity(1, 1),
+    ),
+  )
+
+  yield * front_end_txts[front_end_txts.length-3].text("user", 0.5)
+  yield * front_end_txts[front_end_txts.length-2].text("********", 0.5)
+
+  yield * frontendText.text('Frontend', 0.5);
+
+  yield* all(
+    front_end_txts[front_end_txts.length-1].opacity(0, 0.5),
+    frontendText.text('Frontend - Upload', 1),
+    front_end_rects[front_end_rects.length-1].opacity(1, 1),
+    front_end_rects[front_end_rects.length-1].width('80%', 1),
+    front_end_rects[front_end_rects.length-1].position(front_end_rects[0].top().addY(front_end_rects[front_end_rects.length-1].height()/2), 1),
+
+    front_end_rects[front_end_rects.length-2].opacity(0, 1),
+    front_end_rects[front_end_rects.length-3].opacity(0, 1),
+    ...front_end_txts.map(txt =>
+      txt.opacity(0, 1),
+    ),
+  )
+
+  yield* all (
+    front_end_rects[front_end_rects.length-2].opacity(1, 1),
+    front_end_rects[front_end_rects.length-3].opacity(1, 1),
+  )
+
+  yield* all (
+    front_end_rects[front_end_rects.length-2].opacity(1, 1),
+    front_end_rects[front_end_rects.length-3].opacity(1, 1),
+  )
+
+
+  yield* beginSlide("end of presentation.")
 });
