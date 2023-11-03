@@ -1,6 +1,6 @@
 import {makeScene2D} from '@motion-canvas/2d/lib/scenes';
-import {Txt, Rect, Line, Spline} from '@motion-canvas/2d/lib/components'
-import { Direction, SimpleSignal, Vector2, all, beginSlide, createRef, createSignal, makeRef, range, waitFor, waitUntil } from '@motion-canvas/core';
+import {Txt, Rect, Line, Spline, View2D} from '@motion-canvas/2d/lib/components'
+import { Direction, SimpleSignal, Vector2, all, beginSlide, createRef, createSignal, makeRef, range, waitFor, waitUntil, Vector2Signal } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
 
@@ -38,7 +38,7 @@ export default makeScene2D(function* (view) {
     "Chunk Worker",
     "Converter Worker",
     "Thumbnail Worker",
-    "Status Worker",
+    "Status",
   ];
 
   const componentsSize = components.length;
@@ -157,6 +157,7 @@ export default makeScene2D(function* (view) {
     yield* status(1.0, 1)
   }
 
+  yield* beginSlide("whatthe")
 
   //==================//
   //                  //
@@ -200,6 +201,8 @@ export default makeScene2D(function* (view) {
     yield* status(1.0, 1)
   }
 
+  yield* beginSlide("whatthestatus")
+
   //=================//
   //                 //
   // Backend Service //
@@ -242,6 +245,8 @@ export default makeScene2D(function* (view) {
 
     yield* status(1.0, 1)
   }
+
+  yield* beginSlide("whatthestatusback")
 
   //==================//
   //                  //
@@ -352,6 +357,8 @@ export default makeScene2D(function* (view) {
     )
     }
   }
+
+  yield* beginSlide("whatthestatusbackstuff")
 
   //===================//
   //                   //
@@ -553,17 +560,18 @@ export default makeScene2D(function* (view) {
 
     yield* returnLines[3].end(1, 1);
 
+    yield* beginSlide("whatthestatusbackstufflololol")
+
     yield* splineLine().end(1,1);
   }
 
+  yield* beginSlide("whatthestatusbackstuffokay")
   
   //================//
   //                //
   //   End of map   //
   //                //
   //================//
-
-  yield* beginSlide("Explaining frontend")
 
   // Let's focus on the frontend.
   yield* all (
@@ -638,8 +646,6 @@ export default makeScene2D(function* (view) {
   yield view.add(
     <>
     <Rect
-      // width={200}
-      // height={80}
       opacity={0}
       ref={makeRef(front_end_rects, front_end_rects.length)}
       fill={'#585b70'}
@@ -653,8 +659,6 @@ export default makeScene2D(function* (view) {
         />
     </Rect>
     <Rect
-      // width={200}
-      // height={80}
       opacity={0}
       ref={makeRef(front_end_rects, front_end_rects.length)}
       fill={'#585b70'}
@@ -668,8 +672,23 @@ export default makeScene2D(function* (view) {
         />
     </Rect>
     <Rect
-      // width={200}
-      // height={80}
+      opacity={0}
+      ref={makeRef(front_end_rects, front_end_rects.length)}
+      fill={'#b4befe'}
+      y={150}
+      grow={0}
+    >
+      <Txt
+        text={"login"}
+        alignItems={'center'}
+        alignContent={'center'}
+        justifyContent={'center'}
+        textAlign={'center'}
+        opacity={0}
+        ref={makeRef(front_end_txts, front_end_txts.length)}
+        />
+    </Rect>
+    <Rect
       opacity={0}
       ref={makeRef(front_end_rects, front_end_rects.length)}
       fill={'#b4befe'}
@@ -690,8 +709,8 @@ export default makeScene2D(function* (view) {
   )
 
   yield* all(
-    front_end_rects[front_end_rects.length-1].opacity(1, 1),
-    front_end_rects[front_end_rects.length-1].width(200, 1),
+    // front_end_rects[front_end_rects.length-1].opacity(1, 1),
+    front_end_rects[front_end_rects.length-1].width(size*12, 1),
     front_end_rects[front_end_rects.length-1].height(80, 1),
 
     front_end_rects[front_end_rects.length-2].opacity(1, 1),
@@ -701,40 +720,302 @@ export default makeScene2D(function* (view) {
     front_end_rects[front_end_rects.length-3].opacity(1, 1),
     front_end_rects[front_end_rects.length-3].width(200, 1),
     front_end_rects[front_end_rects.length-3].height(80, 1),
+
+    front_end_rects[front_end_rects.length-4].opacity(1, 1),
+    front_end_rects[front_end_rects.length-4].width(200, 1),
+    front_end_rects[front_end_rects.length-4].height(80, 1),
     ...front_end_txts.map(txt =>
       txt.opacity(1, 1),
     ),
   )
 
-  yield * front_end_txts[front_end_txts.length-3].text("user", 0.5)
-  yield * front_end_txts[front_end_txts.length-2].text("********", 0.5)
+  yield * front_end_txts[front_end_txts.length-4].text("user", 0.5)
+  yield * front_end_txts[front_end_txts.length-3].text("********", 0.5)
+
+  yield* beginSlide("loginlogin");
 
   yield * frontendText.text('Frontend', 0.5);
 
   yield* all(
-    front_end_txts[front_end_txts.length-1].opacity(0, 0.5),
-    frontendText.text('Frontend - Upload', 1),
-    front_end_rects[front_end_rects.length-1].opacity(1, 1),
-    front_end_rects[front_end_rects.length-1].width('80%', 1),
-    front_end_rects[front_end_rects.length-1].position(front_end_rects[0].top().addY(front_end_rects[front_end_rects.length-1].height()/2), 1),
+    front_end_txts[front_end_txts.length-2].opacity(0, 0.5),
+    frontendText.text('Frontend - Upload', 2),
+    front_end_rects[front_end_rects.length-2].opacity(1, 1),
+    front_end_rects[front_end_rects.length-2].width('80%', 1),
+    front_end_rects[front_end_rects.length-2].position(front_end_rects[0].top().addY(front_end_rects[front_end_rects.length-2].height()/2), 1),
 
-    front_end_rects[front_end_rects.length-2].opacity(0, 1),
     front_end_rects[front_end_rects.length-3].opacity(0, 1),
+    front_end_rects[front_end_rects.length-4].opacity(0, 1),
     ...front_end_txts.map(txt =>
       txt.opacity(0, 1),
     ),
+    front_end_txts[front_end_txts.length-3].text("", 1),
+    front_end_txts[front_end_txts.length-4].text("", 1),
+  )
+  yield* all (
+    front_end_txts[front_end_txts.length-1].text("Upload NOW", 0),
+    front_end_txts[front_end_txts.length-2].text("Upload", 0),
   )
 
   yield* all (
-    front_end_rects[front_end_rects.length-2].opacity(1, 1),
+    front_end_rects[front_end_rects.length-1].opacity(1, 1),
     front_end_rects[front_end_rects.length-3].opacity(1, 1),
+    front_end_rects[front_end_rects.length-4].opacity(1, 1),
+    front_end_rects[front_end_rects.length-3].width(size*12, 1),
+    front_end_rects[front_end_rects.length-4].width(size*12, 1),
+    front_end_txts[front_end_txts.length-1].opacity(1, 1),
+    front_end_txts[front_end_txts.length-2].opacity(1, 1),
+    front_end_txts[front_end_txts.length-3].opacity(1, 1),
+    front_end_txts[front_end_txts.length-4].opacity(1, 1),
   )
 
   yield* all (
-    front_end_rects[front_end_rects.length-2].opacity(1, 1),
-    front_end_rects[front_end_rects.length-3].opacity(1, 1),
+    front_end_txts[front_end_txts.length-3].text("my awesome video", 0.5),
+    front_end_txts[front_end_txts.length-4].text("awesome_video.mov", 0.5),
   )
 
+  yield* beginSlide("justinslide")
 
-  yield* beginSlide("end of presentation.")
+  yield* all (
+    ...front_end_lines.map(line => line.opacity(0, 1)),
+    ...front_end_rects.map(rect => rect.opacity(0, 1)),
+    ...front_end_txts.map(txt => txt.opacity(0, 1)),
+    frontendText.text("Upload - Sequence Diagram", 1),
+  )
+
+  var data_flow_rect: Rect[] = [];
+  var data_flow_txts: Txt[] = [];
+  var data_flow_lines: Line[] = [];
+  var data_flow_texts = ["Frontend", "Traefik", "Auth", "Backend", "S3", "MySQL", "Scheduler", "Converter", "Chunker", "Thumbnailer", "Status"];
+  var dfm = new Map(data_flow_texts.map((i, v) => [i, v]))
+  let data_flow_gap = 150;
+
+  var get_df_pos = function(i: number) {
+    return -880 + (data_flow_gap * i)
+  }
+  var make_line = function(start, end, text, ypos, fontsize, twoway=false): [number, View2D] {
+    var save = data_flow_lines.length
+    return [data_flow_lines.length, view.add(
+          <Line
+            lineWidth={5}
+            stroke={'#ff6470'}
+            y={ypos}
+            endArrow
+            startArrow={twoway}
+            ref={makeRef(data_flow_lines, data_flow_lines.length)}
+            arrowSize={10}
+            end={0}
+            points={[() => start(), () => end()]}
+          >
+            <Txt
+              fontSize={fontsize}
+              fill={'#cdd6f4'}
+              text={text}
+              alignItems={'center'}
+              alignContent={'center'}
+              justifyContent={'center'}
+              textAlign={'center'}
+              opacity={() => data_flow_lines[save].end()}
+              position={() => start().addX((end().x - start().x)/2).addY(-20)}
+            />
+          </Line>
+    )]
+  }
+
+  yield view.add(
+    range(data_flow_texts.length).map(i => (
+      <Rect
+        width={20}
+        height={750}
+        opacity={1}
+        x={-880 }
+        ref={makeRef(data_flow_rect, data_flow_rect.length)}
+        fill={'#313244'}
+      >
+        <Txt 
+          text={data_flow_texts[i]}
+          opacity={0}
+          ref={makeRef(data_flow_txts, data_flow_txts.length)}
+          fill={'#cdd6f4'}
+          fontSize={25}
+          y={-400}
+          />
+      </Rect>
+    ))
+  )
+
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Frontend")].right, data_flow_rect[dfm.get("Traefik")].left, "Request upload", -330, 16)
+
+    yield lineview;
+    yield* data_flow_txts[dfm.get("Frontend")].opacity(1, 1)
+
+    yield* all (
+      data_flow_txts[dfm.get("Traefik")].opacity(1, 1),
+      data_flow_rect[dfm.get("Traefik")].x(get_df_pos(dfm.get("Traefik")), 1),
+      data_flow_lines[line].end(1, 1),
+    )
+    yield* data_flow_rect[dfm.get("Auth")].x(get_df_pos(dfm.get("Traefik")), 0)
+  }
+
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Traefik")].right, data_flow_rect[dfm.get("Auth")].left, "Forward Auth", -310, 16)
+    yield lineview;
+    yield* all (
+      data_flow_txts[dfm.get("Auth")].opacity(1, 1),
+      data_flow_rect[dfm.get("Auth")].x(get_df_pos(dfm.get("Auth")), 1),
+      data_flow_lines[line].end(1, 1),
+    )
+    yield* data_flow_rect[dfm.get("Backend")].x(get_df_pos(dfm.get("Auth")), 0)
+  }
+
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Auth")].right, data_flow_rect[dfm.get("Backend")].left, "Ok, forward", -310, 16)
+    yield lineview;
+    yield* all (
+      data_flow_txts[dfm.get("Backend")].opacity(1, 1),
+      data_flow_rect[dfm.get("Backend")].x(get_df_pos(dfm.get("Backend")), 1),
+      data_flow_lines[line].end(1, 1),
+    )
+    yield* data_flow_rect[dfm.get("S3")].x(get_df_pos(dfm.get("Backend")), 0)
+  }
+
+  // Generate presigned url
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Backend")].right, data_flow_rect[dfm.get("S3")].left, "Generate", -270, 16, true)
+    yield lineview;
+    yield* all (
+      data_flow_txts[dfm.get("S3")].opacity(1, 1),
+      data_flow_rect[dfm.get("S3")].x(get_df_pos(dfm.get("S3")), 1),
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  // Return presigned url
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Backend")].left, data_flow_rect[dfm.get("Frontend")].right, "Presigned URL", -230, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  yield* beginSlide("Upload to s3")
+
+  // Upload
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Frontend")].right, data_flow_rect[dfm.get("S3")].left, "Upload", -180, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  // Complete
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("S3")].left, data_flow_rect[dfm.get("Frontend")].right, "Complete", -130, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  yield* beginSlide("Save")
+
+  // Save
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Frontend")].right, data_flow_rect[dfm.get("Backend")].left, "Save video", -80, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+    yield* data_flow_rect[dfm.get("MySQL")].x(get_df_pos(dfm.get("S3")), 0)
+  }
+
+  // Save in DB
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Backend")].right, data_flow_rect[dfm.get("MySQL")].left, "Save video entry", -60, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+      data_flow_txts[dfm.get("MySQL")].opacity(1, 1),
+      data_flow_rect[dfm.get("MySQL")].x(get_df_pos(dfm.get("MySQL")), 1),
+    )
+    yield* data_flow_rect[dfm.get("Scheduler")].x(get_df_pos(dfm.get("MySQL")), 0)
+  }
+
+  yield* beginSlide("Kick start pipeline process.")
+
+  // Scheduler
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Backend")].right, data_flow_rect[dfm.get("Scheduler")].left, "Save video entry", -10, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+      data_flow_txts[dfm.get("Scheduler")].opacity(1, 1),
+      data_flow_rect[dfm.get("Scheduler")].x(get_df_pos(dfm.get("Scheduler")), 1),
+    )
+    yield* data_flow_rect[dfm.get("Converter")].x(get_df_pos(dfm.get("Scheduler")), 0)
+  }
+
+  yield* beginSlide("PIPELINE: Convert")
+
+  // Converter
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Scheduler")].right, data_flow_rect[dfm.get("Converter")].left, "Save video entry", 20, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+      data_flow_txts[dfm.get("Converter")].opacity(1, 1),
+      data_flow_rect[dfm.get("Converter")].x(get_df_pos(dfm.get("Converter")), 1),
+    )
+    yield* data_flow_rect[dfm.get("Chunker")].x(get_df_pos(dfm.get("Converter")), 0)
+    yield* data_flow_rect[dfm.get("Thumbnailer")].x(get_df_pos(dfm.get("Converter")), 0)
+    yield* data_flow_rect[dfm.get("Status")].x(get_df_pos(dfm.get("Converter")), 0)
+  }
+
+  // Enqueue Chunker, Thumbnailer and Status.
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Converter")].left, data_flow_rect[dfm.get("Scheduler")].right, "Chunk, Thumbnail, Status", 70, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  yield* beginSlide("Chunk, thumbnail, status.")
+
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Scheduler")].right, data_flow_rect[dfm.get("Chunker")].left, "Chunk video", 120, 16)
+    const [line2, lineview2] = make_line(data_flow_rect[dfm.get("Chunker")].left, data_flow_rect[dfm.get("S3")].right, "Save work to S3", 165, 16)
+    const [line3, lineview3] = make_line(data_flow_rect[dfm.get("Scheduler")].right, data_flow_rect[dfm.get("Thumbnailer")].left, "Create thumbnail", 210, 16)
+    const [line4, lineview4] = make_line(data_flow_rect[dfm.get("Thumbnailer")].left, data_flow_rect[dfm.get("S3")].right, "Save work to S3", 260, 16)
+    const [line5, lineview5] = make_line(data_flow_rect[dfm.get("Scheduler")].right, data_flow_rect[dfm.get("Status")].left, "Update status", 300, 16)
+    yield lineview;
+    yield lineview2;
+    yield lineview3;
+    yield lineview4;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+      data_flow_lines[line2].end(1, 1),
+      data_flow_lines[line3].end(1, 1),
+      data_flow_lines[line4].end(1, 1),
+      data_flow_lines[line5].end(1, 1),
+      data_flow_txts[dfm.get("Chunker")].opacity(1, 1),
+      data_flow_rect[dfm.get("Chunker")].x(get_df_pos(dfm.get("Chunker")), 1),
+      data_flow_txts[dfm.get("Thumbnailer")].opacity(1, 1),
+      data_flow_rect[dfm.get("Thumbnailer")].x(get_df_pos(dfm.get("Thumbnailer")), 1),
+      data_flow_txts[dfm.get("Status")].opacity(1, 1),
+      data_flow_rect[dfm.get("Status")].x(get_df_pos(dfm.get("Status")), 1),
+    )
+  }
+  yield* beginSlide("Update status")
+  {
+    const [line, lineview] = make_line(data_flow_rect[dfm.get("Status")].left, data_flow_rect[dfm.get("MySQL")].right, "Update status.", 350, 16)
+    yield lineview;
+    yield* all (
+      data_flow_lines[line].end(1, 1),
+    )
+  }
+
+  yield* beginSlide("End dataflow.")
 });
